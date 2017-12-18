@@ -1,3 +1,5 @@
+<!-- resources/views/tasks.blade.php -->
+
 @extends('layouts.app')
 
 @section('content')
@@ -32,17 +34,15 @@
         </form>
     </div>
 
-    <!-- TODO: Current Tasks -->
-
-
-     @if (count($tasks) > 0)
+     <!-- Current Tasks -->
+    @if (count($tasks) > 0)
         <div class="panel panel-default">
             <div class="panel-heading">
                 Current Tasks
             </div>
 
             <div class="panel-body">
-                <table class="table table-striped task-table">
+                <table class="table table-striped task-table" border="1">
 
                     <!-- Table Headings -->
                     <thead>
@@ -60,7 +60,14 @@
                                 </td>
 
                                 <td>
-                                    <!-- TODO: Delete Button -->
+                                     <form action="{{ url('task/'.$task->id) }}" method="POST">
+                                           {{ csrf_field() }}
+                                           {{ method_field('DELETE') }}
+
+                                         <button type="submit" class="btn btn-danger">
+                                                 <i class="fa fa-trash"></i> Delete
+                                         </button>
+                                     </form>
                                 </td>
                             </tr>
                         @endforeach
